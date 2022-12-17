@@ -4,30 +4,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Document</title>
   </head>
   <body>
-    <p id="display"></p>
-    <button>0</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
+    <div class="wrapper">
+      <p id="display"></p>
+      <div class="container">
+        <div class="numbers">
+          <div class="row">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+          </div>
+          <div class="row">
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+          </div>
 
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
+          <div class="row">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+          </div>
+          <div class="row">
+            <button>0</button>
+            <input type="button" id="dividebtn" value="/" />
+            <input type="button" id="equalsbtn" value="=" />
+          </div>
+        </div>
 
-    <input type="button" id="addbtn" value="+" />
-    <input type="button" id="substractbtn" value="-" />
-    <input type="button" id="multiplybtn" value="*" />
-    <input type="button" id="dividebtn" value="/" />
-
-    <input type="button" id="equalsbtn" value="=" />
-
-    <input type="button" id="clearbtn" value="clear" />
+        <div class="operators">
+          <input type="button" id="addbtn" value="+" />
+          <input type="button" id="substractbtn" value="-" />
+          <input type="button" id="multiplybtn" value="*" />
+          <input type="button" id="clearbtn" value="clear" />
+        </div>
+      </div>
+    </div>
 
     <script src="./index.js"></script>
   </body>

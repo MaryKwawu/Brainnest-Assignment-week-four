@@ -32,23 +32,41 @@ function operate(operator, numbersArr) {
 window.onload = function () {
   const display = document.getElementById("display");
 
+  function updateDisplay() {
+    display.innerHTML = `${leftOperand.join("")} ${
+      currentOperator ? currentOperator : ""
+    } ${rightOperand.join("")}`;
+  }
+
+  function clear() {
+    display.innerHTML = "";
+    leftOperand = [];
+    rightOperand = [];
+    currentOperator = null;
+    result = null;
+  }
+
   // initialise to null
-  let leftOperand = null;
-  let rightOperand = null;
-  let currentNumber = null;
+  let leftOperand = [];
+  let rightOperand = [];
   let currentOperator = null;
+  let result = null;
 
   //select all number btns and attach click event listener
   document.querySelectorAll("button").forEach((button) => {
     button.onclick = function (event) {
-      currentNumber = parseInt(event.target.innerText);
-      display.innerHTML = currentNumber;
+      const currentNumber = event.target.innerText;
 
-      if (leftOperand == null) {
-        leftOperand = currentNumber;
-      } else if (leftOperand !== null) {
-        rightOperand = currentNumber;
+      if (result) {
+        clear();
       }
+      if (!currentOperator) {
+        leftOperand.push(currentNumber);
+      } else {
+        rightOperand.push(currentNumber);
+      }
+
+      updateDisplay();
     };
   });
 
@@ -56,24 +74,21 @@ window.onload = function () {
   document.querySelectorAll("input").forEach((button) => {
     button.onclick = function (event) {
       // without this check = overrides operators
-      if (event.target.value !== "=") {
-        currentOperator = event.target.value;
-      } else if (event.target.value == "=") {
-        const result = operate(currentOperator, [leftOperand, rightOperand]);
+      const operator = event.target.value;
+      if (operator == "=") {
+        result = operate(currentOperator, [
+          parseInt(leftOperand.join("")),
+          parseInt(rightOperand.join("")),
+        ]);
         display.innerHTML = result;
       }
-
-      if (currentOperator == "clear") {
+      if (operator == "clear") {
         clear();
+      }
+      if (operator !== "clear" && operator !== "=" && leftOperand.length > 0) {
+        currentOperator = operator;
+        updateDisplay();
       }
     };
   });
-
-  function clear() {
-    display.innerHTML = "";
-    leftOperand = null;
-    rightOperand = null;
-    currentNumber = null;
-    currentOperator = null;
-  }
 };
